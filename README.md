@@ -49,7 +49,12 @@ bun add @retsumdk/agent-budget-simulator
 ```
 
 ```ts
-import { Simulator, stressScenario, evaluateScenario } from "@retsumdk/agent-budget-simulator";
+import {
+  evaluateScenario,
+  formatResult,
+  stressScenario,
+  Simulator,
+} from "@retsumdk/agent-budget-simulator";
 
 const sim = new Simulator();
 const result = evaluateScenario(sim.run(stressScenario));
@@ -63,6 +68,34 @@ bun start       # run the demo scenario
 bun test        # run the test suite
 bun run build   # type-check and build with tsc
 ```
+
+## Example output
+
+`bun run src/index.ts --scenario starvation` prints:
+
+```text
+Scenario: starvation   policy=strict_priority   seed=11   ticks=15
+Tasks: 18 total | 14 completed | 0 degraded | 4 rejected | 0 aborted
+Completion rate: 77.8%
+
+Resource            Initial     Consumed    Remaining   Utilization
+tokens                13200        13200            0       100.0%
+api_calls               200            0          200         0.0%
+dollars                   3            0            3         0.0%
+
+Agent                     Tier         Dispatch  Complete  Degrade  Reject  Abort  Retries
+critical-bot             critical           10        10        0       0      0        0
+normal-bot               normal              4         4        0       0      0        0
+background-bot           background          0         0        0       4      0        0
+
+Fairness: max wait 14 ticks | starved agents: background-bot | threshold missed
+Status: STARVED   Verdict: FAIL
+Notes:
+  - starved agents: background-bot (max wait 14 ticks > limit 13)
+  - 4 task(s) rejected for an exhausted resource
+```
+
+Exit status is `0` when the scenario runs, and `1` for an unknown scenario or policy name.
 
 ## Real Use Case
 

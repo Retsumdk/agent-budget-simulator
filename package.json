@@ -1,0 +1,51 @@
+{
+  "name": "@retsumdk/agent-budget-simulator",
+  "description": "Scenario simulator for testing agent fleet budgets, priority policies, and failure recovery under load",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "agent",
+    "budget",
+    "simulator",
+    "scheduler",
+    "fairness",
+    "priority-queue",
+    "failure-recovery",
+    "ai-agents",
+    "capacity-planning"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Retsumdk/agent-budget-simulator.git"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "agent-budget-simulator": "./src/index.ts"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "scripts": {
+    "start": "bun run src/index.ts --scenario stress",
+    "demo": "bun run src/index.ts --all",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.0",
+    "typescript": "^5.3.0"
+  }
+}
