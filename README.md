@@ -44,9 +44,17 @@ Simulating a fleet is far cheaper and safer than discovering a starvation or bud
 
 Requires [Bun](https://bun.sh) and TypeScript 5.
 
+This package is **not published on the npm registry**, so there is no `bun add`
+for it yet — run it from a clone:
+
 ```bash
-bun add @retsumdk/agent-budget-simulator
+git clone https://github.com/Retsumdk/agent-budget-simulator.git
+cd agent-budget-simulator
+bun install
 ```
+
+There is no build step to consume it: the sources are TypeScript, Bun runs them
+directly, so import from the clone:
 
 ```ts
 import {
@@ -54,7 +62,7 @@ import {
   formatResult,
   stressScenario,
   Simulator,
-} from "@retsumdk/agent-budget-simulator";
+} from "./src/index.ts";
 
 const sim = new Simulator();
 const result = evaluateScenario(sim.run(stressScenario));
@@ -64,8 +72,8 @@ console.log(formatResult(result));
 Run the bundled demo and tests:
 
 ```bash
-bun start       # run the demo scenario
-bun test        # run the test suite
+bun start       # run the demo scenario (stress)
+bun test        # run the test suite (28 tests)
 bun run build   # type-check and build with tsc
 ```
 
